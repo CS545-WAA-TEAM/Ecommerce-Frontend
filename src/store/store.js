@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, createSlice } from '@reduxjs/toolkit'
 
 const initialUserState = { user: null };
 
@@ -39,7 +39,7 @@ const store = configureStore({
     },
 });
 
-export const counterActions = counterSlice.actions;
+export const userActions = userSlice.actions;
 export const authActions = authSlice.actions;
 
 export default store;
