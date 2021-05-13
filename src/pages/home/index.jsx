@@ -69,9 +69,9 @@ export default function Home() {
     const classes = useStyles();
     const history = useHistory();
 
-    const redirectToLogin = () => {
-        history.push("/login")
-    }
+    // const redirectToLogin = () => {
+    //     history.push("/login")
+    // }
 
     const redirectToSignup = () => {
         history.push("/signup")
