@@ -2,19 +2,15 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import { Route, Switch } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Products from '../../containers/Products/Products'
+import Signup from '../../components/Signup/Signup';
+import Login from '../../components/login/Login';
 
 function Copyright() {
     return (
@@ -44,6 +40,12 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(8),
         paddingBottom: theme.spacing(8),
     },
+    link: {
+        zIndex: 'right',
+        justify: "space-between",
+        margin: theme.spacing(1, 1.5),
+        float: 'left'
+    },
     card: {
         height: '100%',
         display: 'flex',
@@ -61,10 +63,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 
 export default function Home() {
     const classes = useStyles();
+    const history = useHistory();
+
+    const redirectToLogin = () => {
+        history.push("/login")
+    }
+
+    const redirectToSignup = () => {
+        history.push("/signup")
+    }
 
     return (
         <React.Fragment>
@@ -75,12 +86,23 @@ export default function Home() {
                     <Typography variant="h6" color="inherit" noWrap>
                         Ecommerce
           </Typography>
+                    <Link path="/login"><Button color="inherit" variant="outlined" className={classes.link}>
+                        Login
+          </Button></Link>
+
+                    <Button onClick={redirectToSignup} color="inherit" variant="outlined" className={classes.link}>
+                        Sign Up
+          </Button>
                 </Toolbar>
             </AppBar>
             <main>
                 {/* Hero unit */}
 
                 <Products />
+
+                <Signup />
+
+                <Login />
 
 
             </main>
