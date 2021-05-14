@@ -6,12 +6,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Products from '../../containers/Products/Products'
-import Signup from '../../components/Signup/Signup';
-import Login from '../../components/login/Login';
-import Seller from '../../components/Seller/Seller'
 
 function Copyright() {
     return (
@@ -70,9 +66,9 @@ export default function Home() {
     const classes = useStyles();
     const history = useHistory();
 
-    // const redirectToLogin = () => {
-    //     history.push("/login")
-    // }
+    const redirectToLogin = () => {
+        history.push("/login")
+    }
 
     const redirectToSignup = () => {
         history.push("/signup")
@@ -86,14 +82,19 @@ export default function Home() {
                     <CameraIcon className={classes.icon} />
                     <Typography variant="h6" color="inherit" noWrap>
                         Ecommerce
-          </Typography>
-                    <Link path="/login"><Button color="inherit" variant="outlined" className={classes.link}>
-                        Login
-          </Button></Link>
+                    </Typography>
 
-                    <Button onClick={redirectToSignup} color="inherit" variant="outlined" className={classes.link}>
-                        Sign Up
-          </Button>
+                    <Link to="/login">
+                        <Button color="inherit" variant="outlined" className={classes.link}>
+                            Login
+                        </Button>
+                    </Link>
+
+                    <Link to="/register">
+                        <Button color="inherit" variant="outlined" className={classes.link}>
+                            Register
+                        </Button>
+                    </Link>
                 </Toolbar>
             </AppBar>
             <main>

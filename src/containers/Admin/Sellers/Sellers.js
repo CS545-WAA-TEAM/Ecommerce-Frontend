@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import api from '../../configuration/api'
+import api from '../../../configuration/api'
 import MUIDataTable from "mui-datatables";
 
 
-const Sellers = () => {
+const AdminSellers = () => {
 
     const [sellers, setSellers] = useState([]);
     const [isLoading, setLoading] = useState(false);
@@ -79,5 +79,5 @@ const Sellers = () => {
 
 }
 
-export default Sellers;
+export default AdminSellers;
 
