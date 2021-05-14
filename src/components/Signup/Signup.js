@@ -16,6 +16,7 @@ import { signup } from '../../store/user'
 import { useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
 import cogoToast from 'cogo-toast';
+import api from '../../configuration/api';
 
 
 function Copyright() {
@@ -78,12 +79,29 @@ const Signup = () => {
 
 
                     <Formik
-                        initialValues={{ username: '', password: '', fullname: '', Buyer: false, Seller: false }}
+                        initialValues={{ username: '', password: '', fullname: ''}}
                         onSubmit={(values) => {
-                            dispatch(signup(values)).then(() => {
-                                cogoToast.success('You have successfully registerd!');
+                            let seller = false;
+                            let buyer = false;
+                            if(values.picked === 'seller'){
+                                seller = true;
+                            }
+                            if(values.picked === 'buyer'){
+                                buyer = true;
+                            }
+                            api.post("register", {username:values.username
+                            ,password: values.password,
+                            fullName: values.fullname,
+                        seller: seller,
+                    buyer:buyer}).then(function (response){
+                        console.log(response.data);
+                            cogoToast.success('You have successfully registerd!');
                                 history.push("/")
-                            })
+                    })
+                            console.log(values);
+                            // dispatch(signup(values)).then(() => {
+                            
+                            // })
                         }}
                     >
                         {({ isSubmitting }) => (
@@ -140,40 +158,14 @@ const Signup = () => {
                                         </Field>
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <Field name="Buyer">
-                                            {({ field, form, meta }) => (
-                                                <label>
-                                                    <input
-                                                        autoComplete="buyer"
-                                                        label="Buyer"
-                                                        variant="outlined"
-                                                        fullWidth
-                                                        autoFocus
-                                                        {...field}
-                                                        type="radio"
-                                                    />
-                                                    Buyer
-                                                </label>
-
-                                            )}
-                                        </Field>
-                                        <Field name="Seller">
-                                            {({ field, form, meta }) => (
-                                                <label>
-                                                    <input
-                                                        autoComplete="seller"
-                                                        label="Seller"
-                                                        variant="outlined"
-                                                        fullWidth
-                                                        autoFocus
-                                                        {...field}
-                                                        type="radio"
-                                                    />
-                                                    Seller
-                                                </label>
-
-                                            )}
-                                        </Field>
+                                    <label>
+                                    <Field type="radio" name="picked" value="buyer" />
+                                    Buyer
+                                    </label>
+                                    <label>
+                                    <Field type="radio" name="picked" value="seller" />
+                                    Seller
+                                    </label>
 
                                     </Grid>
 
