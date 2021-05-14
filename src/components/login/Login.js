@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Login = () => {
+const LoginComponent = () => {
 
     const dispatch = useDispatch()
     const classes = useStyles();
@@ -121,4 +121,4 @@ const Login = () => {
 
 }
 
-export default Login;
+export default LoginComponent;

@@ -1,7 +1,8 @@
 import React from 'react';
+import OrderComponent from '../../components/Order/Order'
 
 const Orders = () => {
-    return (<h1>Orders Page</h1>)
+    return (<OrderComponent />)
 }
 
 export default Orders;
