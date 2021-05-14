@@ -13,14 +13,17 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+// import { mainListItems, secondaryListItems } from './listItems';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
-import Reviews from '../../pages/admin/reviews';
-import Sellers from '../../pages/admin/sellers';
-import { Route, Switch } from 'react-router';
+import Signup from '../../components/Signup/Signup'
+import Login from '../../components/login/Login'
+import Sellers from './Sellers/Sellers'
+import Reviews from './Reviews/Reviews'
 import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 
 function Copyright() {
     return (
