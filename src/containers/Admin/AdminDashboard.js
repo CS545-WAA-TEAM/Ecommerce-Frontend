@@ -21,8 +21,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 // import { mainListItems, secondaryListItems } from './listItems';
 import Signup from '../../components/Signup/Signup'
 import Login from '../../components/login/Login'
-import Sellers from '../Sellers/Sellers'
-import Reviews from '../Reviews/Reviews'
+import Sellers from './Sellers/Sellers'
+import Reviews from './Reviews/Reviews'
 
 function Copyright() {
     return (
