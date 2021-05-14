@@ -70,11 +70,11 @@ export default function Home() {
     const history = useHistory();
 
     useEffect(() => {
-        if(authenticationService.currentUserValue){
-            if(authenticationService.currentUserValue.role === Role.Admin){
+        if (authenticationService.currentUserValue) {
+            if (authenticationService.currentUserValue.role === Role.Admin) {
                 history.push("/admin")
             }
-            if(authenticationService.currentUserValue.role === Role.Seller){
+            if (authenticationService.currentUserValue.role === Role.Seller) {
                 history.push("/seller")
             }
         }
@@ -97,10 +97,20 @@ export default function Home() {
                     <Typography variant="h6" color="inherit" noWrap>
                         Ecommerce
           </Typography>
-                    {authenticationService.currentUserValue &&  <div> Welcome, {authenticationService.currentUserValue.username}<Button onClick={() => {authenticationService.logout()
-            history.push("/")}} >
-                Logout
-            </Button></div>} 
+                    {authenticationService.currentUserValue && <div> Welcome, {authenticationService.currentUserValue.username}<Button onClick={() => {
+                        authenticationService.logout()
+                        history.push("/")
+                    }} >
+                        Logout
+            </Button>
+
+                        <Button onClick={() => {
+                            history.push("/buyer/orders")
+                        }} >
+                            Your Orders
+            </Button>
+
+                    </div>}
 
                     {!authenticationService.currentUserValue && <div><Button onClick={redirectToLogin} color="inherit" variant="outlined" className={classes.link}>
                         Login
@@ -108,20 +118,20 @@ export default function Home() {
                         <Button onClick={redirectToSignup} color="inherit" variant="outlined" className={classes.link}>
                             Sign Up
           </Button></div>}
-          
+
                 </Toolbar>
             </AppBar>
 
             <Switch>
-                <Route path="/buyer/orders" component={Orders}/>
+                <Route path="/buyer/orders" component={Orders} />
                 <Route path="/"><main>
-                {/* Hero unit */}
+                    {/* Hero unit */}
 
-                <Products />
+                    <Products />
 
-            </main></Route>
+                </main></Route>
             </Switch>
-            
+
             {/* Footer */}
             <footer className={classes.footer}>
                 <Typography variant="h6" align="center" gutterBottom>
