@@ -93,10 +93,13 @@ export default function Home() {
             <CssBaseline />
             <AppBar position="relative">
                 <Toolbar>
-                    <CameraIcon className={classes.icon} />
+                    <Link href="/" >
+                    <CameraIcon  className={classes.icon} />
                     <Typography variant="h6" color="inherit" noWrap>
                         Ecommerce
+                    
           </Typography>
+          </Link>
                     {authenticationService.currentUserValue && <div> Welcome, {authenticationService.currentUserValue.username}<Button onClick={() => {
                         authenticationService.logout()
                         history.push("/")
