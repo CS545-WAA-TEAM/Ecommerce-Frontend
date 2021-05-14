@@ -14,7 +14,7 @@ const Products = (props) => {
 
 
 
-    var config = {
+    const config = {
         method: 'get',
         url: 'http://localhost:8080/products',
         headers: {
@@ -40,7 +40,10 @@ const Products = (props) => {
 
     }
 
-    useEffect(fetchProducts, []);
+    useEffect(()=>{
+        fetchProducts()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
     const prds = products.map(product => {
