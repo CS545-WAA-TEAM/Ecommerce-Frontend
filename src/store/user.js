@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+
 import api from '../configuration/api'
+import jwt_decode from "jwt-decode";
+
+
 
 //slice
 const slice = createSlice({
@@ -12,7 +16,12 @@ const slice = createSlice({
         loginSuccess: (state, action) => {
             state.user = action.payload;
             const token = state.user.userData.token;
+            let decoded = jwt_decode(token);
+            state.user = decoded;
+            console.log(state.user)
             localStorage.setItem('token', JSON.stringify(token))
+
+
         },
         logoutSuccess: (state, action) => {
             state.user = null;
