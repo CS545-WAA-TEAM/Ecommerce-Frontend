@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import api from '../../configuration/api';
 import Address from '../../components/Address/Address';
 import { ShoppingContext } from '../ShoppingCart/ShoppingCart';
+import { authenticationService } from '../../services/authentication.service';
 
 
 
@@ -17,7 +18,7 @@ const Addresses = (props) => {
     function fetchAddresses() {
         setLoading(true);
         setError(null);
-        api.get('buyers/6/addresses')
+        api.get('buyers/'+ authenticationService.currentUserValue.userId +'/addresses')
             .then(function (response) {
                 setAddresses(response.data)
             })

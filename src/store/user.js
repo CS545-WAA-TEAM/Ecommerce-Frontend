@@ -10,18 +10,20 @@ import jwt_decode from "jwt-decode";
 const slice = createSlice({
     name: 'user',
     initialState: {
-        user: null
+        user: localStorage.getItem('user')
     },
     reducers: {
         loginSuccess: (state, action) => {
             state.user = action.payload;
             const token = state.user.userData.token;
             let decoded = jwt_decode(token);
-            console.log("decoded", decoded.sub)
+            console.log("decoded", decoded)
             state.user.username = decoded.sub;
             state.user.userId = decoded.userId;
+            state.user.role = decoded.role;
+            state.user.token = token;
             console.log(state.user)
-            localStorage.setItem('token', JSON.stringify(token))
+            localStorage.setItem('user', JSON.stringify(state.user))
 
 
         },

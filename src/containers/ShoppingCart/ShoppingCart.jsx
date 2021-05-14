@@ -9,6 +9,7 @@ import ShoppingCartProducts from '../ShoppingCartProducts/ShoppingCartProducts';
 import Addresses from '../Addresses/Addresses';
 import { Button } from '@material-ui/core';
 import api from '../../configuration/api'
+import { authenticationService } from '../../services/authentication.service';
 
 export const ShoppingContext = React.createContext({});
 
@@ -35,7 +36,7 @@ const ShoppingCart = () => {
     // const [newAddressSameBilling, setNewAddressSameBilling] = useState(true);
 
     const order = () => {
-        api.post("buyers/6/shoppingcart/process",{shippingAddress: orderAddress.shipping, billingAddress: orderAddress.billing})
+        api.post("buyers/"+authenticationService.currentUserValue.userId+"/shoppingcart/process",{shippingAddress: orderAddress.shipping, billingAddress: orderAddress.billing})
         .then((response) => {
             
         })

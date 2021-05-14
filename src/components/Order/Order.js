@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const OrderComponent = () => {
+const OrderComponent = (props) => {
 
     const [orders, setOrders] = useState([]);
     const [order, setOrder] = useState({});
@@ -75,7 +75,7 @@ const OrderComponent = () => {
         console.log("user", user)
         setLoading(true);
         setError(null);
-        api.get('products/' + 8 + '/orders')
+        api.get('products/' + props.productId + '/orders')
             .then(function (response) {
                 setOrders(response.data)
                 console.log(JSON.stringify(response.data));

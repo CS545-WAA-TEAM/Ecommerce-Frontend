@@ -16,6 +16,9 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { Field, Form, Formik } from 'formik'
 import cogoToast from 'cogo-toast';
+import { useHistory } from 'react-router';
+import { authenticationService } from '../../services/authentication.service';
+// import { history } from '../../helpers/history';
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -57,6 +60,7 @@ const SellerComponent = () => {
     const [modalStyle] = React.useState(getModalStyle);
 
     const { user } = useSelector(state => state.user)
+    const history = useHistory();
 
     const handleEditModal = (id) => {
         setProductId(id)
@@ -94,7 +98,7 @@ const SellerComponent = () => {
         console.log("user", user)
         setLoading(true);
         setError(null);
-        api.get('sellers/' + user.userId + '/products')
+        api.get('sellers/'+authenticationService.currentUserValue.userId+'/products')
             .then(function (response) {
                 setProducts(response.data)
                 console.log(JSON.stringify(response.data));
@@ -125,7 +129,7 @@ const SellerComponent = () => {
     }
     function AddProduct(data) {
         console.log("Add", data)
-        api.post('sellers/' + user.userId + '/products', data)
+        api.post('sellers/' + authenticationService.currentUserValue.userId + '/products', data)
             .then(function (response) {
                 console.log("Product Added")
                 cogoToast.success('Product successfuly Added!');
@@ -152,9 +156,9 @@ const SellerComponent = () => {
     }
 
     const options = {
-        selectableRows: true,
-        selectableRowsOnClick: true,
-        onRowClick: handleRowClick
+        // selectableRows: true,
+        // selectableRowsOnClick: true,
+        // onRowClick: handleRowClick
     };
 
     function handleRowClick() {
@@ -162,7 +166,7 @@ const SellerComponent = () => {
     }
 
     function redirectToOrders(id) {
-        console.log("h", id)
+        history.push("/seller/orders/"+id)
     }
 
     const columns = [

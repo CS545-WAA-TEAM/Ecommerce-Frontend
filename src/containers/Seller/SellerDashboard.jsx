@@ -19,10 +19,11 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 
-import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Button, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import Products from '../../pages/seller/products';
 import Orders from '../../pages/seller/orders';
+import { authenticationService } from '../../services/authentication.service';
 
 function Copyright() {
     return (
@@ -117,6 +118,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SellerDashboard() {
+    const history = useHistory();
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -144,6 +146,11 @@ export default function SellerDashboard() {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Dashboard
           </Typography>
+            <Button onClick={() => {authenticationService.logout()
+            history.push("/")}} >
+                Logout
+            </Button>
+          
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -179,14 +186,7 @@ export default function SellerDashboard() {
                                 </ListItemIcon>
                                 <ListItemText primary="Products" />
                             </ListItem>
-                        </Link>
-                        <Link to="/seller/orders">
-                        <ListItem button>
-                            <ListItemIcon>
-                                <PeopleIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Orders" />
-                        </ListItem></Link></List>
+                        </Link></List>
                     <Divider />
 
                 </div>
@@ -197,7 +197,7 @@ export default function SellerDashboard() {
                     <Grid container spacing={3}>
                     <Switch>
                 <Route path="/seller/products" component={Products} />
-                <Route path="/seller/orders" component={Orders} />
+                <Route path="/seller/orders/:productId" component={Orders} />
                 <Route path="/"><h1>Seller Index</h1></Route>
             </Switch>
                     </Grid>

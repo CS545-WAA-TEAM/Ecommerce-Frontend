@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../configuration/api';
 import ShoppingCartProduct from '../../components/ShoppingCartProduct/ShoppingCartProduct'
+import { authenticationService } from '../../services/authentication.service';
 
 const ShoppingCartProducts = (props) => {
 
@@ -11,7 +12,7 @@ const ShoppingCartProducts = (props) => {
     function fetchProducts() {
         setLoading(true);
         setError(null);
-        api.get('buyers/6/shoppingcart')
+        api.get('buyers/'+authenticationService.currentUserValue.userId+'/shoppingcart')
             .then(function (response) {
                 setProducts(response.data)
                 // console.log(JSON.stringify(response.data));
@@ -30,7 +31,7 @@ const ShoppingCartProducts = (props) => {
     }, []);
 
     const updateShoppingCart = (prods) => {
-        api.patch('/buyers/6/shoppingcart',prods)
+        api.patch('/buyers/'+authenticationService.currentUserValue.userId+'/shoppingcart',prods)
             .then(function (response) {
                 setProducts(response.data)
                 console.log(JSON.stringify(response.data));
