@@ -50,8 +50,8 @@ const Product = (props) => {
     return (
         <React.Fragment>
             <Container className={classes.cardGrid} maxWidth="md">
-                <Grid container spacing={4}>
-                    <Grid item xs={12} sm={6} md={4}>
+                <Grid container spacing={1}>
+                    <Grid item xs={12} sm={12} md={12}>
                         <Card className={classes.card}>
                             <CardMedia
                                 className={classes.cardMedia}
