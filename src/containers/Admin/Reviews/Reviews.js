@@ -3,7 +3,7 @@ import api from '../../../configuration/api'
 import MUIDataTable from "mui-datatables";
 
 
-const Reviews = () => {
+const AdminReviews = () => {
 
     const [reviews, setReviews] = useState([]);
     const [isLoading, setLoading] = useState(false);
@@ -79,5 +79,5 @@ const Reviews = () => {
 
 }
 
-export default Reviews;
+export default AdminReviews;
 

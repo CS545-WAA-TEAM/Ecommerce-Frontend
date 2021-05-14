@@ -6,12 +6,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Products from '../../containers/Products/Products'
 import Signup from '../../components/Signup/Signup';
 import Login from '../../components/login/Login';
-import Seller from '../../components/Seller/Seller'
+import SellerComponent from '../../components/Seller/SellerComponent'
 import { useSelector } from 'react-redux'
 
 function Copyright() {

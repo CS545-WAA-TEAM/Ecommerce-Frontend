@@ -6,31 +6,30 @@ import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 // import { mainListItems, secondaryListItems } from './listItems';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PeopleIcon from '@material-ui/icons/People';
 import Signup from '../../components/Signup/Signup'
 import Login from '../../components/login/Login'
 import Sellers from './Sellers/Sellers'
 import Reviews from './Reviews/Reviews'
+import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Link, Route, Switch } from 'react-router-dom';
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
                 Your Website
-      </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -160,26 +159,48 @@ export default function Dashboard() {
                         <ChevronLeftIcon />
                     </IconButton>
                 </div>
+                <div>
+
+
+                    <Divider />
+
+                    <List>
+                        <Link to="/admin">
+                        <ListItem button>
+                            <ListItemIcon>
+                                <DashboardIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Dashboard" />
+                        </ListItem>
+                        </Link>
+                        <Link to="/admin/reviews">
+                            <ListItem button >
+                                <ListItemIcon>
+                                    <ShoppingCartIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Reviews" />
+                            </ListItem>
+                        </Link>
+                        <Link to="/admin/sellers">
+                        <ListItem button>
+                            <ListItemIcon>
+                                <PeopleIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Sellers" />
+                        </ListItem></Link></List>
+                    <Divider />
+
+                </div>
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-
-
-                        {/* Sellers */}
-                        <Grid item xs={12}>
-                            <Paper className={classes.paper}>
-                                <Sellers />
-                            </Paper>
-                        </Grid>
-
-                        {/* Reviews */}
-                        <Grid item xs={12}>
-                            <Paper className={classes.paper}>
-                                <Reviews />
-                            </Paper>
-                        </Grid>
+                        <Switch>
+                            <Route path="/admin/reviews" component={Reviews} />
+                            <Route path="/admin/sellers" component={Sellers} />
+                            <Route path="/"><h1>Admin Index</h1></Route>
+                        </Switch>
                     </Grid>
                     <Box pt={4}>
                         <Copyright />

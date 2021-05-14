@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import Orders from './orders';
 import Products from './products';
-import SellerComponent from '../../components/Seller/Seller'
+import SellerComponent from '../../components/Seller/SellerComponent'
 
 const Seller = () => {
     return (
