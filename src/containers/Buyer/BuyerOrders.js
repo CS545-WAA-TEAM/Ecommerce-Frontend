@@ -17,6 +17,7 @@ import Container from '@material-ui/core/Container'
 import { Field, Form, Formik } from 'formik'
 import Paper from '@material-ui/core/Paper';
 import MUIDataTable from "mui-datatables";
+import { authenticationService } from '../../services/authentication.service';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -70,7 +71,7 @@ const BuyerOrders = (props) => {
     function fetchOrdersByBuyer() {
         setLoading(true);
         setError(null);
-        api.get('buyers/' + 6 + '/orders')
+        api.get('buyers/' + authenticationService.currentUserValue.userId + '/orders')
             .then(function (response) {
                 setOrders(response.data)
                 console.log("buyerOrders", response.data)
