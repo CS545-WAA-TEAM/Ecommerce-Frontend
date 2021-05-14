@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Product from '../../components/Product/Product'
+import { Link, Route } from 'react-router-dom';
 
 
 
@@ -40,20 +41,20 @@ const Products = (props) => {
 
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchProducts()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
     const prds = products.map(product => {
-        return (
+        return <Link to={'products' + '/' + product.id} key={product.id}>
             <Product
                 key={product.id}
                 name={product.name}
                 description={product.description}
                 id={product.id} />
-        )
+        </Link>
 
     });
 

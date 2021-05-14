@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import clsx from 'clsx';
 import api from '../../configuration/api'
-import ReviewComponent from '../../components/Review/Review'
+import ReviewComponent from '../../components/Review/ReviewComponent'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
