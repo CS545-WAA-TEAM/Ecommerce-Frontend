@@ -1,7 +1,8 @@
 import React from 'react';
+import BuyerOrders from '../../containers/Buyer/BuyerOrders';
 
 const Orders = () => {
-    return (<h1>Orders Page</h1>)
+    return (<BuyerOrders />)
 }
 
 export default Orders;
