@@ -22,8 +22,9 @@ import Signup from '../../components/Signup/Signup'
 import Login from '../../components/login/Login'
 import Sellers from './Sellers/Sellers'
 import Reviews from './Reviews/Reviews'
-import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Button, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
+import { authenticationService } from '../../services/authentication.service';
 
 function Copyright() {
     return (
@@ -118,6 +119,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
+    const history = useHistory();
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -145,6 +147,10 @@ export default function Dashboard() {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Dashboard
           </Typography>
+          <Button onClick={() => {authenticationService.logout()
+            history.push("/")}} >
+                Logout
+            </Button>
                 </Toolbar>
             </AppBar>
             <Drawer

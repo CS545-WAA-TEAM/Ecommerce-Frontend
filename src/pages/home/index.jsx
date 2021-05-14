@@ -12,6 +12,8 @@ import Signup from '../../components/Signup/Signup';
 import Login from '../../components/login/Login';
 import SellerComponent from '../../components/Seller/SellerComponent'
 import { useSelector } from 'react-redux'
+import { authenticationService } from '../../services/authentication.service';
+import { Role } from '../../helpers/role';
 
 function Copyright() {
     return (
@@ -69,10 +71,17 @@ const useStyles = makeStyles((theme) => ({
 export default function Home() {
     const classes = useStyles();
     const history = useHistory();
-    const { user } = useSelector(state => state.user)
-    const [loggedInUser, setLoggedInUser] = useState();
 
-
+    useEffect(() => {
+        if(authenticationService.currentUserValue){
+            if(authenticationService.currentUserValue.role === Role.Admin){
+                history.push("/admin")
+            }
+            if(authenticationService.currentUserValue.role === Role.Seller){
+                history.push("/seller")
+            }
+        }
+    }, [])
     const redirectToSignup = () => {
         history.push("/register")
     }
@@ -80,13 +89,6 @@ export default function Home() {
         history.push("/login")
     }
 
-    if (user) {
-        // setLoggedInUser(user)
-        // console.log("loggedInuser", loggedInUser)
-    }
-    // useEffect(() => {
-
-    // }, [user])
 
 
     return (
@@ -98,15 +100,18 @@ export default function Home() {
                     <Typography variant="h6" color="inherit" noWrap>
                         Ecommerce
           </Typography>
-                    {user &&  <div> Welcome, {user.username}</div>} 
+                    {authenticationService.currentUserValue &&  <div> Welcome, {authenticationService.currentUserValue.username}<Button onClick={() => {authenticationService.logout()
+            history.push("/")}} >
+                Logout
+            </Button></div>} 
 
-                    {!user && <div><Button onClick={redirectToLogin} color="inherit" variant="outlined" className={classes.link}>
+                    {!authenticationService.currentUserValue && <div><Button onClick={redirectToLogin} color="inherit" variant="outlined" className={classes.link}>
                         Login
           </Button>
                         <Button onClick={redirectToSignup} color="inherit" variant="outlined" className={classes.link}>
                             Sign Up
           </Button></div>}
-
+          
                 </Toolbar>
             </AppBar>
 
