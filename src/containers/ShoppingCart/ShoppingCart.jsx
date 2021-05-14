@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const ShoppingCart = () => {
+const ShoppingCart = (props) => {
 
     const [orderAddress, setOrderAddress] = useState({
         shipping: null,
@@ -47,6 +47,7 @@ const ShoppingCart = () => {
     return (
         <div className={classes.root}>
             <ShoppingContext.Provider value={{orderAddress, setOrderAddress,checkout, setCheckout}}>
+                {props.checkAgain}
                 <Accordion defaultExpanded>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}

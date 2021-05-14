@@ -27,6 +27,8 @@ import Reviews from '../../containers/Reviews/Reviews';
 import Paper from '@material-ui/core/Paper';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+import { authenticationService } from '../../services/authentication.service';
+import Products from '../../pages/seller/products';
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -145,16 +147,20 @@ export default function ProductDetail(props) {
 
     const addtoCart = () => {
         console.log("shopping cart method")
-        let prodArr = [];
-        prodArr.push(product)
-        api.patch('buyers/' + 6 + '/shoppingcart', prodArr)
+        api.get('buyers/'+authenticationService.currentUserValue.userId+ '/shoppingcart')
+            .then(function (response) {
+                let products = response.data;
+                products.push(product);
+                api.patch('buyers/' + authenticationService.currentUserValue.userId + '/shoppingcart', products)
             .then(function (response) {
                 console.log("resp", response.data)
-                setRefresh(true)
+                setRefresh(true);
             })
             .catch(function (error) {
                 console.log(error);
             });
+            })
+        
     }
 
     useEffect(fetchProductDetail, [])
@@ -191,13 +197,13 @@ export default function ProductDetail(props) {
                         {/* Shopping Cart */}
                         <Grid item xs={12} md={8} lg={8}>
                             <Paper className={fixedHeightPaper}>
-                                <ShoppingCart />
+                                <ShoppingCart checkAgain={refresh} />
                             </Paper>
                         </Grid>
                         {/* Reviews */}
                         <Grid item xs={12}>
                             <Paper className={classes.paper}>
-                                <Reviews />
+                                <Reviews productId = {props.productId}/>
                             </Paper>
                         </Grid>
                     </Grid>

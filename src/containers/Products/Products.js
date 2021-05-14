@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Product from '../../components/Product/Product'
 import { Link, Route } from 'react-router-dom';
+import { authenticationService } from '../../services/authentication.service';
 
 
 
@@ -48,13 +49,21 @@ const Products = (props) => {
 
 
     const prds = products.map(product => {
-        return <Link to={'products' + '/' + product.id} key={product.id}>
+        if(authenticationService.currentUserValue){
+            return <Link to={'products' + '/' + product.id} key={product.id}>
             <Product
                 key={product.id}
                 name={product.name}
                 description={product.description}
                 id={product.id} />
         </Link>
+        } else {
+            return <Product
+            key={product.id}
+            name={product.name}
+            description={product.description}
+            id={product.id} />
+        }
 
     });
 
