@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -12,6 +12,7 @@ import Products from '../../containers/Products/Products'
 import Signup from '../../components/Signup/Signup';
 import Login from '../../components/login/Login';
 import Seller from '../../components/Seller/Seller'
+import { useSelector } from 'react-redux'
 
 function Copyright() {
     return (
@@ -69,14 +70,25 @@ const useStyles = makeStyles((theme) => ({
 export default function Home() {
     const classes = useStyles();
     const history = useHistory();
+    const { user } = useSelector(state => state.user)
+    const [loggedInUser, setLoggedInUser] = useState();
 
-    // const redirectToLogin = () => {
-    //     history.push("/login")
-    // }
 
     const redirectToSignup = () => {
-        history.push("/signup")
+        history.push("/register")
     }
+    const redirectToLogin = () => {
+        history.push("/login")
+    }
+
+    if (user) {
+        setLoggedInUser(user)
+        console.log("loggedInuser", loggedInUser)
+    }
+    useEffect(() => {
+
+    }, [user])
+
 
     return (
         <React.Fragment>
@@ -87,15 +99,20 @@ export default function Home() {
                     <Typography variant="h6" color="inherit" noWrap>
                         Ecommerce
           </Typography>
-                    <Link path="/login"><Button color="inherit" variant="outlined" className={classes.link}>
-                        Login
-          </Button></Link>
+                    {/* {user.username} ?  <div> Welcome, {user.username}</div> */}
 
-                    <Button onClick={redirectToSignup} color="inherit" variant="outlined" className={classes.link}>
-                        Sign Up
+                    : <div><Button onClick={redirectToLogin} color="inherit" variant="outlined" className={classes.link}>
+                        Login
           </Button>
+
+                        <Button onClick={redirectToSignup} color="inherit" variant="outlined" className={classes.link}>
+                            Sign Up
+          </Button></div>
+
                 </Toolbar>
             </AppBar>
+
+
             <main>
                 {/* Hero unit */}
 
