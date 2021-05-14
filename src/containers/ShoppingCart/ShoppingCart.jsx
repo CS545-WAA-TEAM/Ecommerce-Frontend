@@ -10,6 +10,7 @@ import Addresses from '../Addresses/Addresses';
 import { Button } from '@material-ui/core';
 import api from '../../configuration/api'
 import { authenticationService } from '../../services/authentication.service';
+import cogoToast from 'cogo-toast';
 
 export const ShoppingContext = React.createContext({});
 
@@ -38,7 +39,7 @@ const ShoppingCart = (props) => {
     const order = () => {
         api.post("buyers/"+authenticationService.currentUserValue.userId+"/shoppingcart/process",{shippingAddress: orderAddress.shipping, billingAddress: orderAddress.billing})
         .then((response) => {
-            
+            cogoToast.success("Successfully Ordered!");
         })
         // console.log(orderAddress);
     }
