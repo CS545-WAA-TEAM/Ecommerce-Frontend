@@ -3,17 +3,14 @@ import { Route, Switch } from 'react-router';
 import Orders from './orders';
 import Products from './products';
 import SellerComponent from '../../components/Seller/SellerComponent'
+import SellerDashboard from '../../containers/Seller/SellerDashboard';
 
-const Seller = () => {
+const SellerP = () => {
     return (
         <div>
-            <Switch>
-                <Route path="/seller/products" component={Products} />
-                <Route path="/seller/orders" component={Orders} />
-                <Route path="/"><SellerComponent /></Route>
-            </Switch>
+            <SellerDashboard/>
         </div>
     );
 }
 
-export default Seller;
+export default SellerP;

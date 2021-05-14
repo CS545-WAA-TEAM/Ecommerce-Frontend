@@ -1,7 +1,8 @@
 import React from 'react';
+import SellerComponent from '../../components/Seller/SellerComponent';
 
 const Products = () => {
-    return (<h1>Products Page</h1>)
+    return (<SellerComponent/>)
 }
 
 export default Products;
