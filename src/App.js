@@ -22,8 +22,7 @@ function App() {
         <Route exact path="/register" component={Register} />
         <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
         <PrivateRoute path="/seller" roles={[Role.Seller]} component={SellerP} />
-   
-        <Route path="/buyer" component={Buyer} />
+        <PrivateRoute path="/buyer" roles={[Role.Buyer]} component={Buyer} />
         <Route path="/sellers/:id" component={SellerPage} />
         <Route path="/products/:id" component={ProductPage} />
         <Route exact path="/" component={Home} />
