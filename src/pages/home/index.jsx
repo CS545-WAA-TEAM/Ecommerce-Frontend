@@ -81,12 +81,12 @@ export default function Home() {
     }
 
     if (user) {
-        setLoggedInUser(user)
-        console.log("loggedInuser", loggedInUser)
+        // setLoggedInUser(user)
+        // console.log("loggedInuser", loggedInUser)
     }
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [user])
+    // }, [user])
 
 
     return (
@@ -98,15 +98,14 @@ export default function Home() {
                     <Typography variant="h6" color="inherit" noWrap>
                         Ecommerce
           </Typography>
-                    {/* {user.username} ?  <div> Welcome, {user.username}</div> */}
+                    {user &&  <div> Welcome, {user.username}</div>} 
 
-                    : <div><Button onClick={redirectToLogin} color="inherit" variant="outlined" className={classes.link}>
+                    {!user && <div><Button onClick={redirectToLogin} color="inherit" variant="outlined" className={classes.link}>
                         Login
           </Button>
-
                         <Button onClick={redirectToSignup} color="inherit" variant="outlined" className={classes.link}>
                             Sign Up
-          </Button></div>
+          </Button></div>}
 
                 </Toolbar>
             </AppBar>
