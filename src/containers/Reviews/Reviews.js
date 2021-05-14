@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
 import { Field, Form, Formik } from 'formik'
 import Paper from '@material-ui/core/Paper';
+import { authenticationService } from '../../services/authentication.service';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -69,7 +70,7 @@ const Reviews = (props) => {
     function fetchReviews() {
         setLoading(true);
         setError(null);
-        api.get('products/' + 8 + '/reviews')
+        api.get('products/' + props.productId + '/reviews')
             .then(function (response) {
                 setReviews(response.data)
                 console.log("reviews", response.data)
@@ -86,7 +87,7 @@ const Reviews = (props) => {
     function addReview(data) {
         //TODO
         console.log(data)
-        api.get('buyers/' + 6 + '/products/' + 8 + '/reviews')
+        api.post('buyers/' + authenticationService.currentUserValue.userId + '/products/' + props.productId + '/reviews',data)
             .then(function (response) {
                 setRefresh(true)
                 console.log("reviews", response.data)

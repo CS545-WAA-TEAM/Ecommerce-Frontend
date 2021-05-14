@@ -6,14 +6,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import Products from '../../containers/Products/Products'
-import Signup from '../../components/Signup/Signup';
-import Login from '../../components/login/Login';
-import SellerComponent from '../../components/Seller/SellerComponent'
-import { useSelector } from 'react-redux'
 import { authenticationService } from '../../services/authentication.service';
 import { Role } from '../../helpers/role';
+import Orders from '../buyer/orders';
 
 function Copyright() {
     return (
@@ -21,7 +18,7 @@ function Copyright() {
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
                 Your Website
-      </Link>{' '}
+    </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -115,13 +112,16 @@ export default function Home() {
                 </Toolbar>
             </AppBar>
 
-
-            <main>
+            <Switch>
+                <Route path="/buyer/orders" component={Orders}/>
+                <Route path="/"><main>
                 {/* Hero unit */}
 
                 <Products />
 
-            </main>
+            </main></Route>
+            </Switch>
+            
             {/* Footer */}
             <footer className={classes.footer}>
                 <Typography variant="h6" align="center" gutterBottom>
