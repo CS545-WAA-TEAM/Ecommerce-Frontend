@@ -105,7 +105,6 @@ export default function Home() {
             </Button>
 
                         <Button onClick={() => {
-                            authenticationService.logout()
                             history.push("/buyer/orders")
                         }} >
                             Your Orders
@@ -124,15 +123,15 @@ export default function Home() {
             </AppBar>
 
             <Switch>
-                <Route path="/buyer/orders" component={Orders}/>
+                <Route path="/buyer/orders" component={Orders} />
                 <Route path="/"><main>
-                {/* Hero unit */}
+                    {/* Hero unit */}
 
-                <Products />
+                    <Products />
 
-            </main></Route>
+                </main></Route>
             </Switch>
-            
+
             {/* Footer */}
             <footer className={classes.footer}>
                 <Typography variant="h6" align="center" gutterBottom>
