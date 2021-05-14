@@ -17,7 +17,9 @@ const slice = createSlice({
             state.user = action.payload;
             const token = state.user.userData.token;
             let decoded = jwt_decode(token);
-            state.user = decoded;
+            console.log("decoded", decoded.sub)
+            state.user.username = decoded.sub;
+            state.user.userId = decoded.userId;
             console.log(state.user)
             localStorage.setItem('token', JSON.stringify(token))
 
