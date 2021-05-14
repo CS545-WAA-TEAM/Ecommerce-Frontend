@@ -18,12 +18,11 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
-import Signup from '../../components/Signup/Signup'
-import Login from '../../components/login/Login'
-import Sellers from './Sellers/Sellers'
-import Reviews from './Reviews/Reviews'
+
 import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { Link, Route, Switch } from 'react-router-dom';
+import Products from '../../pages/seller/products';
+import Orders from '../../pages/seller/orders';
 
 function Copyright() {
     return (
@@ -117,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Dashboard() {
+export default function SellerDashboard() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -165,7 +164,7 @@ export default function Dashboard() {
                     <Divider />
 
                     <List>
-                        <Link to="/admin">
+                        <Link to="/seller">
                         <ListItem button>
                             <ListItemIcon>
                                 <DashboardIcon />
@@ -173,20 +172,20 @@ export default function Dashboard() {
                             <ListItemText primary="Dashboard" />
                         </ListItem>
                         </Link>
-                        <Link to="/admin/reviews">
+                        <Link to="/seller/products">
                             <ListItem button >
                                 <ListItemIcon>
                                     <ShoppingCartIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Reviews" />
+                                <ListItemText primary="Products" />
                             </ListItem>
                         </Link>
-                        <Link to="/admin/sellers">
+                        <Link to="/seller/orders">
                         <ListItem button>
                             <ListItemIcon>
                                 <PeopleIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Sellers" />
+                            <ListItemText primary="Orders" />
                         </ListItem></Link></List>
                     <Divider />
 
@@ -196,11 +195,11 @@ export default function Dashboard() {
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <Switch>
-                            <Route path="/admin/reviews" component={Reviews} />
-                            <Route path="/admin/sellers" component={Sellers} />
-                            <Route path="/"><h1>Admin Index</h1></Route>
-                        </Switch>
+                    <Switch>
+                <Route path="/seller/products" component={Products} />
+                <Route path="/seller/orders" component={Orders} />
+                <Route path="/"><h1>Seller Index</h1></Route>
+            </Switch>
                     </Grid>
                     <Box pt={4}>
                         <Copyright />

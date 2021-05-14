@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import api from '../../configuration/api'
 import MUIDataTable from "mui-datatables";
 import Modal from '@material-ui/core/Modal';
-import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -15,6 +15,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { Field, Form, Formik } from 'formik'
+import cogoToast from 'cogo-toast';
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -93,7 +94,7 @@ const SellerComponent = () => {
         console.log("user", user)
         setLoading(true);
         setError(null);
-        api.get('sellers/' + 5 + '/products')
+        api.get('sellers/' + user.userId + '/products')
             .then(function (response) {
                 setProducts(response.data)
                 console.log(JSON.stringify(response.data));
@@ -113,40 +114,40 @@ const SellerComponent = () => {
     function editProduct(data) {
         api.patch('products/' + productId, data)
             .then(function (response) {
+                cogoToast.success('Product successfuly Edited!');
                 fetchProductsBySeller()
                 setOpen(false)
             })
             .catch(function (error) {
                 console.log(error);
-                setLoading(false)
-                setError(error.message);
+                cogoToast.error('Something went wrong! Please try, Again');
             });
     }
     function AddProduct(data) {
         console.log("Add", data)
-        api.post('sellers/' + 5 + '/products', data)
+        api.post('sellers/' + user.userId + '/products', data)
             .then(function (response) {
                 console.log("Product Added")
+                cogoToast.success('Product successfuly Added!');
                 fetchProductsBySeller()
                 setOpen(false)
             })
             .catch(function (error) {
                 console.log(error);
-                setLoading(false)
-                setError(error.message);
+                cogoToast.error('Something went wrong! Please try, Again');
             });
     }
     function DeleteProduct(id) {
         console.log("Delete", id)
         api.delete('products/' + id)
             .then(function (response) {
-                setProducts(response.data)
+                cogoToast.success('Product successfuly Added!');
+                fetchProductsBySeller()
                 console.log(JSON.stringify(response.data));
             })
             .catch(function (error) {
                 console.log(error);
-                setLoading(false)
-                setError(error.message);
+                cogoToast.error('Something went wrong! Please try, Again');
             });
     }
 

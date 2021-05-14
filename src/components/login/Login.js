@@ -13,7 +13,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import { Redirect, useHistory } from 'react-router-dom'
+import cogoToast from 'cogo-toast';
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -51,7 +52,7 @@ const LoginComponent = () => {
 
     const dispatch = useDispatch()
     const classes = useStyles();
-
+    const history = useHistory();
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -64,7 +65,15 @@ const LoginComponent = () => {
           </Typography>
                 <Formik
                     initialValues={{ username: '', password: '' }}
-                    onSubmit={(values) => { dispatch(login(values)) }}
+                    onSubmit={(values) => {
+                        dispatch(login(values)).then(() => {
+                            cogoToast.success('Login Successful!');
+                            history.push("/")
+                        }
+
+
+                        )
+                    }}
                 >
 
                     <Form>

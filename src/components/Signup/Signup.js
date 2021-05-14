@@ -13,8 +13,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Field, Form, Formik } from 'formik'
 import { signup } from '../../store/user'
-
-
+import { useSelector } from 'react-redux'
+import { Redirect, useHistory } from 'react-router-dom'
+import cogoToast from 'cogo-toast';
 
 
 function Copyright() {
@@ -22,7 +23,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+                Ecommerce
         </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -54,8 +55,14 @@ const Signup = () => {
 
     const dispatch = useDispatch();
     const classes = useStyles();
+    const { user } = useSelector(state => state.user)
+    const history = useHistory();
+
+
 
     return (
+
+
 
 
         <Fragment>
@@ -72,7 +79,12 @@ const Signup = () => {
 
                     <Formik
                         initialValues={{ username: '', password: '', fullname: '', Buyer: false, Seller: false }}
-                        onSubmit={(values) => { dispatch(signup(values)) }}
+                        onSubmit={(values) => {
+                            dispatch(signup(values)).then(() => {
+                                cogoToast.success('You have successfully registerd!');
+                                history.push("/")
+                            })
+                        }}
                     >
                         {({ isSubmitting }) => (
                             <Form>
@@ -135,7 +147,6 @@ const Signup = () => {
                                                         autoComplete="buyer"
                                                         label="Buyer"
                                                         variant="outlined"
-                                                        required
                                                         fullWidth
                                                         autoFocus
                                                         {...field}
@@ -153,7 +164,6 @@ const Signup = () => {
                                                         autoComplete="seller"
                                                         label="Seller"
                                                         variant="outlined"
-                                                        required
                                                         fullWidth
                                                         autoFocus
                                                         {...field}
@@ -180,7 +190,7 @@ const Signup = () => {
           </Button>
                                 <Grid container justify="flex-end">
                                     <Grid item>
-                                        <Link href="#" variant="body2">
+                                        <Link href="/login" variant="body2">
                                             Already have an account? Sign in
               </Link>
                                     </Grid>
