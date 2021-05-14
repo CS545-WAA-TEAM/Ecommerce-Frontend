@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import Products from '../../containers/Products/Products'
 import Signup from '../../components/Signup/Signup';
 import Login from '../../components/login/Login';
+import Seller from '../../components/Seller/Seller'
 
 function Copyright() {
     return (
@@ -99,11 +100,6 @@ export default function Home() {
                 {/* Hero unit */}
 
                 <Products />
-
-                <Signup />
-
-                <Login />
-
 
             </main>
             {/* Footer */}

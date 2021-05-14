@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import Orders from './orders';
 import Products from './products';
+import SellerComponent from '../../components/Seller/Seller'
 
 const Seller = () => {
     return (
@@ -9,7 +10,7 @@ const Seller = () => {
             <Switch>
                 <Route path="/seller/products" component={Products} />
                 <Route path="/seller/orders" component={Orders} />
-                <Route path="/"><h1>Seller Index</h1></Route>
+                <Route path="/"><SellerComponent /></Route>
             </Switch>
         </div>
     );
